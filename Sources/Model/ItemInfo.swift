@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemInfo: Decodable {
+public struct ItemInfo: Decodable {
     let floatValue: Float?
     let name: String?
     let weapon: String?

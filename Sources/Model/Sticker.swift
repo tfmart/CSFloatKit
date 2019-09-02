@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Sticker: Decodable {
+public struct Sticker: Decodable {
     private enum CodingKeys: String, CodingKey {
         let stickerID: String?
         let slot: Int?

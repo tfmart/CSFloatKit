@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeaponSkin: Decodable {
+public class WeaponSkin: Decodable {
     let iteminfo: ItemInfo?
     let error: String?
     let code: Int?
@@ -15,7 +15,7 @@ class WeaponSkin: Decodable {
 
 // MARK: - Extension
 
-extension WeaponSkin {
+public extension WeaponSkin {
     /// Boolean value indicating whether the skin is StatTrak
     var isStatTrak: Bool {
         guard let weaponInfo = self.iteminfo, weaponInfo.statTrak != nil else {
