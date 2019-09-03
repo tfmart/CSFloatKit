@@ -7,15 +7,17 @@
 
 import Foundation
 
-public enum ApiError {
+public enum ApiError: Error {
     case invalidParameters
     case invalidInspectLink
     case maxPendingRequests
     case serverTimeout
     case serverUnavailable
+    case urlError
+    case decodeError
     case unknownError
     
-    static func errorWithCode(code: Int) -> APIError {
+    static func errorWithCode(code: Int) -> ApiError {
         switch code {
         case 1:
             return .invalidParameters
@@ -44,6 +46,10 @@ public enum ApiError {
             return "Valve's servers didn't reply in time"
         case .serverUnavailable:
             return "Valve's servers appear to be offline, please try again later!"
+        case .urlError:
+            return "URL Error"
+        case .decodeError:
+            return "Decode Error"
         case .unknownError:
             return "An unknown error occurred"
         }
