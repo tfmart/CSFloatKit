@@ -2,14 +2,17 @@ import XCTest
 @testable import SWGOFloat
 
 final class SWGOFloatTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(SWGOFloat().text, "Hello, World!")
+    
+    func testWithInspectLink() {
+        let config = FloatController(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
+        
+        config.getWeaponInfo { response in
+            switch response {
+            case .success(let skin):
+                XCTAssert(skin.iteminfo?.fullItemName == "Silver Operation Breakout Coin")
+            case .failure( _):
+                XCTFail()
+            }
+        }
     }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }

@@ -8,12 +8,10 @@
 import Foundation
 
 public struct Sticker: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        let stickerID: String?
-        let slot: Int?
-        let codename: String?
-        let name: String?
-    }
+    let stickerID: String?
+    let slot: Int?
+    let codename: String?
+    let name: String?
     
     private enum CodingKeys: String, CodingKey {
         case slot, codename, name

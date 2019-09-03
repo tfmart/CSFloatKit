@@ -28,7 +28,7 @@ public struct ItemInfo: Decodable {
     let qualityName: String?
     let rarityName: String?
     let wear: String?
-    let fullItemName
+    let fullItemName: String?
     
     private enum CodingKeys: String, CodingKey {
         case paintseed, stickers, inventory
