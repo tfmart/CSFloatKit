@@ -8,27 +8,27 @@
 import Foundation
 
 public struct ItemInfo: Decodable {
-    let floatValue: Float?
-    let name: String?
-    let weapon: String?
-    let imageURL: String?
-    let statTrak: Int?
-    let rarity: Int?
-    let itemID: String?
-    let weaponID: Int?
-    let paintIndex: Int?
-    let paintseed: Int?
-    let nameTag: String?
-    let stickers: [Sticker]?
-    let inventory: Int?
-    let originID: Int?
-    let minFloat: Float?
-    let maxFloat: Float?
-    let origin: String?
-    let qualityName: String?
-    let rarityName: String?
-    let wear: String?
-    let fullItemName: String?
+    public let floatValue: Float?
+    public let name: String?
+    public let weapon: String?
+    public let imageURL: String?
+    public let statTrak: Int?
+    public let rarity: Int?
+    public let itemID: String?
+    public let weaponID: Int?
+    public let paintIndex: Int?
+    public let paintseed: Int?
+    public let nameTag: String?
+    public let stickers: [Sticker]?
+    public let inventory: Int?
+    public let originID: Int?
+    public let minFloat: Float?
+    public let maxFloat: Float?
+    public let origin: String?
+    public let qualityName: String?
+    public let rarityName: String?
+    public let wear: String?
+    public let fullItemName: String?
     
     private enum CodingKeys: String, CodingKey {
         case paintseed, stickers, inventory
