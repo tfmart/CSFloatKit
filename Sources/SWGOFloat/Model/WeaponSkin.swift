@@ -8,7 +8,7 @@
 import Foundation
 
 public class WeaponSkin: Decodable {
-    let iteminfo: ItemInfo?
+    public let iteminfo: ItemInfo?
     let error: String?
     let code: Int?
 }
