@@ -67,8 +67,20 @@ public class FloatController {
                 }
                 completion(.failure(.errorWithCode(code: errorCode)))
             } catch {
+                data.printJSON()
                 completion(.failure(.decodeError))
             }
         }.resume()
+    }
+}
+
+extension Data
+{
+    func printJSON()
+    {
+        if let JSONString = String(data: self, encoding: String.Encoding.utf8)
+        {
+            print(JSONString)
+        }
     }
 }
