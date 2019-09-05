@@ -50,7 +50,7 @@ public class FloatController {
             return
         }
         URLSession.shared.dataTask(with: URLRequest(url: url)) { (data, response, error) in
-            guard error != nil else {
+            guard error == nil else {
                 completion(.failure(.unknownError))
                 return
             }
