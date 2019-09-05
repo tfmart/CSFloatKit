@@ -69,6 +69,6 @@ public class FloatController {
             } catch {
                 completion(.failure(.decodeError))
             }
-        }
+        }.resume()
     }
 }
