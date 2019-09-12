@@ -11,6 +11,17 @@ public class WeaponSkin: Decodable {
     public let iteminfo: ItemInfo?
     let error: String?
     let code: Int?
+    
+    private enum CodingKeys: String, CodingKey {
+        case iteminfo, error, code
+    }
+    
+    required public init(from decoder:Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.iteminfo = try? container.decode(ItemInfo.self, forKey: .iteminfo)
+        self.code = try? container.decode(Int.self, forKey: .code)
+        self.error = try? container.decode(String.self, forKey: .error)
+    }
 }
 
 // MARK: - Extension
