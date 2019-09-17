@@ -15,4 +15,17 @@ final class SWGOFloatTests: XCTestCase {
             }
         }
     }
+    
+    func testWithSADMParameters() {
+        let config = FloatController(inventoryParameter: nil, aParameter: "13874827217", dParameter: "4649025583329100061", marketParameter: "2608048286785948758")
+        
+        config.getWeaponInfo { response in
+            switch response {
+            case .success(let skin):
+                XCTAssert(skin.iteminfo?.name == "Redline")
+            case .failure( _):
+                XCTFail()
+            }
+        }
+    }
 }

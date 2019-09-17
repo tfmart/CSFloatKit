@@ -13,31 +13,51 @@ public class FloatController {
     /// A weapon's inspect link
     public var inspectLink: String?
     /// A weapon's S, A, D and M parameters
-    public var sParameter: String?
+    public var inventoryParameter: String?
     public var aParameter: String?
     public var dParameter: String?
-    public var mParatemer: String?
+    public var marketParameter: String?
     
     private let baseURL = "https://api.csgofloat.com/"
     
     /// Instantiate FloatController with an item's S, A, D and M parameters
-    public init(sParameter: String?, aParameter: String, dParameter: String, mParameter: String?) {
-        self.sParameter = sParameter
+    public init(inventoryParameter: String?, aParameter: String, dParameter: String, marketParameter: String?) {
+        self.inventoryParameter = inventoryParameter
         self.aParameter = aParameter
         self.dParameter = dParameter
-        self.mParatemer = mParameter
+        self.marketParameter = marketParameter
+        self.inspectLink = nil
     }
     
     /// Instantiate FloatController with an item's inpect link
     public init(inspectLink: String) {
         self.inspectLink = inspectLink
+        self.inventoryParameter = nil
+        self.aParameter = nil
+        self.dParameter = nil
+        self.marketParameter = nil
     }
     
     private func setRequestURL() -> String {
         if let inspectLink = self.inspectLink {
             return "\(baseURL)?url=\(inspectLink)"
         } else if let aParameter = self.aParameter, let dParameter = self.dParameter {
-            return "\(baseURL)?s=\(self.aParameter ?? "")&a=\(aParameter)&d=\(dParameter)&m=\(self.mParatemer ?? "")"
+            var sParameter: String
+            var mParameter: String
+            
+            if let parameter = self.inventoryParameter {
+                sParameter = "s=\(parameter)&"
+            } else {
+                sParameter = ""
+            }
+            
+            if let parameter = self.marketParameter {
+                mParameter = "&m=\(parameter)"
+            } else {
+                mParameter = ""
+            }
+            
+            return "\(baseURL)?\(sParameter)a=\(aParameter)&d=\(dParameter)\(mParameter)"
         } else {
             return ""
         }
