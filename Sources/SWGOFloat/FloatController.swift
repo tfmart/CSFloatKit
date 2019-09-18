@@ -12,15 +12,18 @@ public class FloatController {
     private init() {}
     /// A weapon's inspect link
     public var inspectLink: String?
-    /// A weapon's S, A, D and M parameters
+    /// Inspect link "s" parameter, if the item is from an player's inventory
     public var inventoryParameter: String?
+    /// Inspect link "a" parameter
     public var aParameter: String?
+    /// Inspect link "d" parameter
     public var dParameter: String?
+    /// Inspect link "m" parameter, if the item is from the Community Market
     public var marketParameter: String?
     
     private let baseURL = "https://api.csgofloat.com/"
     
-    /// Instantiate FloatController with an item's S, A, D and M parameters
+    /// Instantiate FloatController with the S, A, D and M parameters
     public init(inventoryParameter: String?, aParameter: String, dParameter: String, marketParameter: String?) {
         self.inventoryParameter = inventoryParameter
         self.aParameter = aParameter
@@ -38,6 +41,11 @@ public class FloatController {
         self.marketParameter = nil
     }
     
+    /**
+     Sets the Request URL depending of which parameters were initiated
+     
+     - Returns: A string representing the URL to be used in the request
+    */
     private func setRequestURL() -> String {
         if let inspectLink = self.inspectLink {
             return "\(baseURL)?url=\(inspectLink)"
@@ -63,7 +71,12 @@ public class FloatController {
         }
     }
     
-    public func getWeaponInfo(completion: @escaping (Result<WeaponSkin, ApiError>) -> Void) {
+    /**
+     Makes the CSGO Float API request to get an item's information
+     
+     - Returns: A Result type, representing either a Skin in case of success or an ApiError in case the request fails
+    */
+    public func getWeaponInfo(completion: @escaping (Result<Skin, ApiError>) -> Void) {
         let urlRequest = setRequestURL()
         guard let url = URL(string: urlRequest) else {
             completion(.failure(.urlError))
@@ -80,27 +93,15 @@ public class FloatController {
             }
             
             do {
-                let fetchedWeapon = try JSONDecoder().decode(WeaponSkin.self, from: data)
+                let fetchedWeapon = try JSONDecoder().decode(Skin.self, from: data)
                 guard let errorCode = fetchedWeapon.code else {
                     completion(.success(fetchedWeapon))
                     return
                 }
                 completion(.failure(.errorWithCode(code: errorCode)))
             } catch {
-                data.printJSON()
                 completion(.failure(.decodeError))
             }
         }.resume()
-    }
-}
-
-extension Data
-{
-    func printJSON()
-    {
-        if let JSONString = String(data: self, encoding: String.Encoding.utf8)
-        {
-            print(JSONString)
-        }
     }
 }

@@ -7,16 +7,32 @@
 
 import Foundation
 
+/// Contains the possible erros during the API request
 public enum ApiError: Error {
+    /// CSGOFloat API Error 1: The parameters sent on the request's URL are invalid
     case invalidParameters
+    /// CSGOFloat API Error 2: The inspect link sent on the request is invalid
     case invalidInspectLink
+    /// CSGOFloat API Error 3: The user has reached the maximum amount of pending requests
     case maxPendingRequests
+    /// CSGOFloat API Error 4: The server didn't reply on time
     case serverTimeout
+    /// CSGOFloat API Error 5: The server could not be reached at the moment
     case serverUnavailable
+    /// Could not create a URL from the information recieved
     case urlError
+    /// Could not decode a Skin from the data provided
     case decodeError
+    /// Unknown error for an unexpected case
     case unknownError
     
+    /**
+     Determines which error ocurred from the recieved code
+     
+     - Parameters:
+       - code: The CSGOFloat API error code
+     - Returns: The error related to the recieved code
+    */
     static func errorWithCode(code: Int) -> ApiError {
         switch code {
         case 1:
@@ -34,6 +50,7 @@ public enum ApiError: Error {
         }
     }
     
+    /// Returns an error message for each error case
     public var message: String {
         switch self {
         case .invalidParameters:

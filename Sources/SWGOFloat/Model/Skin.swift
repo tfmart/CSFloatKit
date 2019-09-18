@@ -7,18 +7,22 @@
 
 import Foundation
 
-public class WeaponSkin: Decodable {
-    public let iteminfo: ItemInfo?
-    let error: String?
-    let code: Int?
+public class Skin: Decodable {
+    /// Contains all the information about the skin
+    public let itemInfo: ItemInfo?
+    /// The error message, in case the API returns an error
+    public let error: String?
+    /// The error code, in case the API returns an error
+    public let code: Int?
     
     private enum CodingKeys: String, CodingKey {
-        case iteminfo, error, code
+        case error, code
+        case itemInfo = "iteminfo"
     }
     
     required public init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.iteminfo = try? container.decode(ItemInfo.self, forKey: .iteminfo)
+        self.itemInfo = try? container.decode(ItemInfo.self, forKey: .itemInfo)
         self.code = try? container.decode(Int.self, forKey: .code)
         self.error = try? container.decode(String.self, forKey: .error)
     }
@@ -26,10 +30,10 @@ public class WeaponSkin: Decodable {
 
 // MARK: - Extension
 
-public extension WeaponSkin {
+public extension Skin {
     /// Boolean value indicating whether the skin is StatTrak
     var isStatTrak: Bool {
-        guard let weaponInfo = self.iteminfo, weaponInfo.statTrak != nil else {
+        guard let weaponInfo = self.itemInfo, weaponInfo.statTrak != nil else {
             return false
         }
         return true
@@ -37,7 +41,7 @@ public extension WeaponSkin {
     
     /// Boolean value indicating whether the skin has painting applied
     var isVanilla: Bool {
-        guard let weaponInfo = self.iteminfo, weaponInfo.name == "-" else {
+        guard let weaponInfo = self.itemInfo, weaponInfo.name == "-" else {
             return false
         }
         return true

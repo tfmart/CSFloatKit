@@ -9,7 +9,7 @@ final class SWGOFloatTests: XCTestCase {
         config.getWeaponInfo { response in
             switch response {
             case .success(let skin):
-                XCTAssert(skin.iteminfo?.fullItemName == "Silver Operation Breakout Coin")
+                XCTAssert(skin.itemInfo?.fullItemName == "Silver Operation Breakout Coin")
             case .failure( _):
                 XCTFail()
             }
@@ -22,7 +22,7 @@ final class SWGOFloatTests: XCTestCase {
         config.getWeaponInfo { response in
             switch response {
             case .success(let skin):
-                XCTAssert(skin.iteminfo?.name == "Redline")
+                XCTAssert(skin.itemInfo?.name == "Redline")
             case .failure( _):
                 XCTFail()
             }

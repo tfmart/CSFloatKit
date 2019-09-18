@@ -8,26 +8,47 @@
 import Foundation
 
 public class ItemInfo: Decodable {
+    /// The item's float value, representing it's wear
     public let floatValue: Float?
+    /// The name of the weapon's skin
     public let name: String?
+    /// The weapon's type
     public let weapon: String?
+    /// The skin's image URL
     public let imageURL: String?
+    /// If the weapon is StatTrak, the amount of kills registered
     public let statTrak: Int?
+    /// The weapon's rarity
     public let rarity: Int?
+    /// The skin's ID
     public let itemID: String?
+    /// The weapon's ID
     public let weaponID: Int?
+    /// The weapon's Paint ID
     public let paintIndex: Int?
+    /// The weapon's Paint Seed
     public let paintseed: Int?
+    /// If the weapon has a name tag, the weapon's custom name
     public let nameTag: String?
+    /// The stickers applied to the weapon
     public let stickers: [Sticker]?
+    /// Inventory ID
     public let inventory: Int?
+    /// The weapon's Origin ID
     public let originID: Int?
+    /// The skin's lowest float value possible
     public let minFloat: Float?
+    /// The skin's highest float value possible
     public let maxFloat: Float?
+    /// The weapon's origin
     public let origin: String?
+    /// The weapon's quality name (Souvenir, StatTrak, etc...)
     public let qualityName: String?
+    /// The weapon's rarity name
     public let rarityName: String?
+    /// The weapon's wear (Factory New, Field-Tested, etc...)
     public let wear: String?
+    /// A string with the weapon's name, the skin's name and it's condition name
     public let fullItemName: String?
     
     private enum CodingKeys: String, CodingKey {
