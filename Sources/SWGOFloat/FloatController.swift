@@ -7,8 +7,8 @@
 
 import Foundation
 
-public class FloatController {
-    public static let shared = FloatController()
+public class SWGORequester {
+    public static let shared = SWGORequester()
     private init() {}
     /// A weapon's inspect link
     public var inspectLink: String?
