@@ -26,3 +26,17 @@ public class Sticker: Decodable {
         self.name = try? container.decode(String.self, forKey: .name)
     }
 }
+
+
+// MARK: - Extension
+
+public extension Sticker {
+    /// Get the sticker's image URL
+    func getImageURL() -> String? {
+        guard let name = self.name else { return nil }
+        let completeName = "Sticker | \(name)"
+        guard let encodedName = completeName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return nil }
+        let baseURL = "http://api.steamapis.com/image/item/730/"
+        return "\(baseURL)\(encodedName)"
+    }
+}
