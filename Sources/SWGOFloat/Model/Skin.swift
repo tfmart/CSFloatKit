@@ -46,5 +46,27 @@ public extension Skin {
         }
         return true
     }
+    
+    /// String representing the item's inspect link
+    var inspectLink: String? {
+        let baseURL = "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20"
+        var optionalParameter: String
+        guard let aParameter = self.itemInfo?.aParameter, let dParameter = self.itemInfo?.dParameter else { return nil }
+        if let parameter = self.itemInfo?.inventoryParameter {
+            optionalParameter = "S\(parameter)"
+        } else if let parameter = self.itemInfo?.marketParameter {
+            optionalParameter = "M\(parameter)"
+        } else {
+            return nil
+        }
+        return "\(baseURL)\(optionalParameter)A\(aParameter)D\(dParameter)"
+    }
+    
+    /// Returns the URL to get the screenshot of the item
+    func getScreenshotURL() -> String? {
+        let baseURL = "csgo.gallery/"
+        guard let inspectLink = self.inspectLink else { return nil }
+        return "\(baseURL)\(inspectLink)"
+    }
 }
 

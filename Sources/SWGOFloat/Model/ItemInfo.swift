@@ -50,6 +50,14 @@ public class ItemInfo: Decodable {
     public let wear: String?
     /// A string with the weapon's name, the skin's name and it's condition name
     public let fullItemName: String?
+    /// The S parameter from the item's inspect link
+    public let inventoryParameter: String?
+    /// The A parameter from the item's inspect link
+    public let aParameter: String?
+    /// The D parameter from the item's inspect link
+    public let dParameter: String?
+    /// The M parameter from the item's inspect link
+    public let marketParameter: String?
     
     private enum CodingKeys: String, CodingKey {
         case paintseed, stickers, inventory
@@ -71,6 +79,10 @@ public class ItemInfo: Decodable {
         case rarityName = "rarity_name"
         case wear = "wear_name"
         case fullItemName = "full_item_name"
+        case inventoryParameter = "s"
+        case aParameter = "a"
+        case dParameter = "d"
+        case marketParameter = "m"
     }
     
     required public init(from decoder:Decoder) throws {
@@ -96,5 +108,9 @@ public class ItemInfo: Decodable {
         self.rarityName = try? container.decode(String.self, forKey: .rarityName)
         self.wear = try? container.decode(String.self, forKey: .wear)
         self.fullItemName = try? container.decode(String.self, forKey: .fullItemName)
+        self.inventoryParameter = try? container.decode(String.self, forKey: .inventoryParameter)
+        self.aParameter = try? container.decode(String.self, forKey: .aParameter)
+        self.dParameter = try? container.decode(String.self, forKey: .dParameter)
+        self.marketParameter = try? container.decode(String.self, forKey: .marketParameter)
     }
 }
