@@ -63,6 +63,11 @@ public extension Skin {
     }
     
     /// Returns the URL to get the screenshot of the item
+    /**
+     Creates a URL to get the skin's screenshot from cs.deals screnshot service
+     
+     - Returns: An optional string representing the URL to get the skin's screenshot or nil if it's the inspect link is invalid
+    */
     func getScreenshotURL() -> String? {
         let baseURL = "csgo.gallery/"
         guard let inspectLink = self.inspectLink else { return nil }
