@@ -1,6 +1,6 @@
 # SWGOFloat
 
-SWGOFloat is a Swift framework that helps to provide a easy way to fetch information about a CS:GO weapon skin. All the information provided comes from [Step7750's CSGO Float API](https://github.com/Step7750/CSGOFloat).
+SWGOFloat is a Swift framework that provides an easy way to fetch information about a CS:GO weapon skin. All the information provided comes from [Step7750's CSGO Float API](https://github.com/Step7750/CSGOFloat).
 
 ## Installation
 
@@ -20,7 +20,7 @@ dependencies: [
 
 To get started, you will need to create an instance of `SWGORequester` and configure it with either an item inspect link or using the S, A, D and M parameters from an inspect link. 
 
-* Initiaing with an inspect link
+* Initiating with an inspect link
 
 ```
 let configuration = SWGORequester(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
@@ -48,7 +48,7 @@ The method will return a `Result` type, which can contain the skin's information
 
 ## Models
 
-Docummentation about the models are coming soon!
+Documentation about the models are coming soon!
 
 ## Goals
 
