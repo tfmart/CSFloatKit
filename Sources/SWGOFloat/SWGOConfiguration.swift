@@ -31,7 +31,7 @@ public class SWGOConfiguration {
     }
     
     /// Instantiate FloatController with an item's inpect link
-    init(inspectLink: String) {
+    public init(inspectLink: String) {
         self.inspectLink = inspectLink
         self.inventoryParameter = nil
         self.aParameter = nil
