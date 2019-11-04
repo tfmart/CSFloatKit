@@ -16,7 +16,7 @@ final class SWGOFloatTests: XCTestCase {
         request.start()
         
         waitForExpectations(timeout: 10) { (error) in
-            XCTAssertNil(skin?.error)
+            XCTAssertNotNil(skin)
         }
     }
     
@@ -33,7 +33,7 @@ final class SWGOFloatTests: XCTestCase {
         request.start()
         
         waitForExpectations(timeout: 10) { (error) in
-            XCTAssertNil(skin?.error)
+            XCTAssertNotNil(skin)
         }
     }
 }
