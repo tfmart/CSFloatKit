@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class FloatConfiguration {
+public class SWGOConfiguration {
     /// A weapon's inspect link
     var inspectLink: String?
     /// Inspect link "s" parameter, if the item is from an player's inventory

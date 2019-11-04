@@ -18,24 +18,24 @@ dependencies: [
 
 ## Usage
 
-To get started, you will need to create an instance of `FloatConfiguration` and configure it with either an item inspect link or using the S, A, D and M parameters from an inspect link. 
+To get started, you will need to create an instance of `SWGOConfiguration` and configure it with either an item inspect link or using the S, A, D and M parameters from an inspect link. 
 
 * Initiating with an inspect link
 
 ```
-let configuration = FloatConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
+let configuration = SWGOConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
 ```
 
 * Initiating with the S, A, D, M parameters
 
 ```
-let configuration = FloatConfiguration(inventoryParameter: nil, aParameter: "13874827217", dParameter: "4649025583329100061", marketParameter: "2608048286785948758")
+let configuration = SWGOConfiguration(inventoryParameter: nil, aParameter: "13874827217", dParameter: "4649025583329100061", marketParameter: "2608048286785948758")
 ```
 
-After the setting up the configuration, create an instance of  `FloatRequester` to create a float request
+After the setting up the configuration, create an instance of  `SWGORequester` to create a float request
 
 ```
-let request = FloatRequester(configuration: config) { (skin, error) in
+let request = SWGORequester(configuration: config) { (skin, error) in
     
 }
 ```
@@ -53,8 +53,8 @@ The request will either the skin fetched from the inspect link or a `ApiError`, 
 After fetching an instance of  `Skin` with the requester, you can it's `getScreenshotURL()` method to get an URL string which can be used to get a screenshot image, by using the [csgo.gallery service frmo CS.Deals](https://cs.deals/pt/screenshot)
 
 ```
-let configuration = FloatConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
-let request = FloatRequester(configuration: config) { (skin, error) in
+let configuration = SWGOConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
+let request = SWGORequester(configuration: config) { (skin, error) in
     let screenshotURL = skin.getScreenshotURL()
     //Returns "https://csgo.gallery/steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177"
 }

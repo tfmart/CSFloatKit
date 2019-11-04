@@ -7,13 +7,13 @@
 
 import Foundation
 
-public class FloatRequester {
+public class SWGORequester {
     public typealias DataReturned = Skin
     public typealias Completion = ((Skin?, ApiError?) -> Void)
     public var completion: ((Skin?, ApiError?) -> Void)?
     public var inspectLink: String
     
-    public init(configuration: FloatConfiguration, completion: Completion? = nil) {
+    public init(configuration: SWGOConfiguration, completion: Completion? = nil) {
         self.completion = completion
         self.inspectLink = configuration.requestURL
     }
