@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SWGORequester.swift
 //  
 //
 //  Created by Tomás Feitoza Martins  on 04/11/19.
@@ -10,38 +10,45 @@ import Foundation
 public class SWGORequester {
     public typealias DataReturned = Skin
     public typealias Completion = ((Skin?, ApiError?) -> Void)
-    public var completion: ((Skin?, ApiError?) -> Void)?
+    public var completion: ((Skin?, ApiError?) -> Void)
     public var inspectLink: String
     
-    public init(configuration: SWGOConfiguration, completion: Completion? = nil) {
+    
+    /// Initializes the requester's inspect link and completion properties
+    /// - Parameter configuration: Instance of SWGOConfiguration, which contains the input data
+    /// - Parameter completion: The Completion of the request, which can return either a Skin or ApiError
+    public init(configuration: SWGOConfiguration, completion: @escaping Completion) {
         self.completion = completion
         self.inspectLink = configuration.requestURL
     }
     
+    /// Starts the Requester
     public func start() {
-        guard let requestURL = URL(string: self.inspectLink) else { return }
+        guard let requestURL = URL(string: self.inspectLink) else {
+            self.completion(nil, .urlError)
+            return
+        }
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = "GET"
-        guard let completion = self.completion else { return }
         
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else {
-                completion(nil, .unknownError)
+                self.completion(nil, .unknownError)
                 return
             }
             let responseData = String(data: data, encoding: String.Encoding.utf8)
             dump(responseData)
             self.parseJson(data: data)
             if error != nil {
-                completion(nil, .unknownError)
+                self.completion(nil, .unknownError)
             }
         }.resume()
     }
     
+    
+    /// Parses the fetched JSON
+    /// - Parameter data: The data retrurned in the request
     public func parseJson(data: Data) {
-        guard let completion = completion else {
-            return
-        }
         do {
             let decodedObject = try self.parseData(data: data)
             if let errorCode = decodedObject.code {
@@ -56,6 +63,8 @@ public class SWGORequester {
         }
     }
     
+    /// Parses the data feched in the request
+    /// - Parameter data: The data returned in the request
     public func parseData(data: Data) throws -> Skin{
         do {
             let decoder = JSONDecoder()

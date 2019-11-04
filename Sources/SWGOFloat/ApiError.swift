@@ -64,9 +64,9 @@ public enum ApiError: Error {
         case .serverUnavailable:
             return "Valve's servers appear to be offline, please try again later!"
         case .urlError:
-            return "URL Error"
+            return "The input is not a valid URL"
         case .decodeError:
-            return "Decode Error"
+            return "The data returned could not be read"
         case .unknownError:
             return "An unknown error occurred"
         }

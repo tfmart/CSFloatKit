@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SWGOConfiguration.swift
 //  
 //
 //  Created by Tomás Feitoza Martins  on 04/11/19.
