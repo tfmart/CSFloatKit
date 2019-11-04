@@ -18,33 +18,48 @@ dependencies: [
 
 ## Usage
 
-To get started, you will need to create an instance of `SWGORequester` and configure it with either an item inspect link or using the S, A, D and M parameters from an inspect link. 
+To get started, you will need to create an instance of `FloatConfiguration` and configure it with either an item inspect link or using the S, A, D and M parameters from an inspect link. 
 
 * Initiating with an inspect link
 
 ```
-let configuration = SWGORequester(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
+let configuration = FloatConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
 ```
 
 * Initiating with the S, A, D, M parameters
 
 ```
-let configuration = SWGORequester(inventoryParameter: nil, aParameter: "13874827217", dParameter: "4649025583329100061", marketParameter: "2608048286785948758")
+let configuration = FloatConfiguration(inventoryParameter: nil, aParameter: "13874827217", dParameter: "4649025583329100061", marketParameter: "2608048286785948758")
 ```
 
-After the initial setup, use the `getWeaponInfo` method to start the request:
+After the setting up the configuration, create an instance of  `FloatRequester` to create a float request
 
 ```
-configuration.getWeaponInfo { response in
-    switch response {
-    case .success(let skin):
-        // The request has been successful
-    case .failure(let error):
-        // The request has failed
-    }
+let request = FloatRequester(configuration: config) { (skin, error) in
+    
 }
 ```
-The method will return a `Result` type, which can contain the skin's information if the request succeeds or an `ApiError`, which represents an error that occurred during the request
+
+And to start the request:
+
+```
+request.start()
+```
+
+The request will either the skin fetched from the inspect link or a `ApiError`, which represents the error that occurred in the request.
+
+## Screenshot
+
+After fetching an instance of  `Skin` with the requester, you can it's `getScreenshotURL()` method to get an URL string which can be used to get a screenshot image, by using the [csgo.gallery service frmo CS.Deals](https://cs.deals/pt/screenshot)
+
+```
+let configuration = FloatConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
+let request = FloatRequester(configuration: config) { (skin, error) in
+    let screenshotURL = skin.getScreenshotURL()
+    //Returns "https://csgo.gallery/steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177"
+}
+
+```
 
 ## Models
 
@@ -54,5 +69,6 @@ Documentation about the models are coming soon!
 
 - [x] Get skin info from CSGO Float API
 - [x] Support for S, A, D and M parameters
-- [ ] Finish writing unit test for the request method
-- [ ] Get an item's screenshot with csgo.gallery
+- [x] Finish writing unit test for the request method
+- [x] Get an item's screenshot with csgo.gallery
+- [ ] Screenshot requester
