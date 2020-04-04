@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class SWGOConfiguration {
+@objc public class SWGOConfiguration: NSObject {
     /// A weapon's inspect link
     var inspectLink: String?
     /// Inspect link "s" parameter, if the item is from an player's inventory
@@ -22,7 +22,7 @@ public class SWGOConfiguration {
     private let baseURL = "https://api.csgofloat.com/"
     
     /// Instantiate FloatController with the S, A, D and M parameters
-    public init(inventoryParameter: String?, aParameter: String, dParameter: String, marketParameter: String?) {
+    @objc public init(inventoryParameter: String?, aParameter: String, dParameter: String, marketParameter: String?) {
         self.inventoryParameter = inventoryParameter
         self.aParameter = aParameter
         self.dParameter = dParameter
@@ -31,7 +31,7 @@ public class SWGOConfiguration {
     }
     
     /// Instantiate FloatController with an item's inpect link
-    public init(inspectLink: String) {
+    @objc public init(inspectLink: String) {
         self.inspectLink = inspectLink
         self.inventoryParameter = nil
         self.aParameter = nil

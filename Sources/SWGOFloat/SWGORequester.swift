@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class SWGORequester {
+@objc public class SWGORequester: NSObject {
     public typealias DataReturned = Skin
     public typealias Completion = ((Skin?, ApiError?) -> Void)
     public var completion: ((Skin?, ApiError?) -> Void)
