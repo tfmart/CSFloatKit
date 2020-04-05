@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Sticker: Decodable {
+@objc public class Sticker: NSObject, Decodable {
     /// The sticker's ID number
     public let stickerID: String?
     /// The position in which the sticker is applied in the weapon

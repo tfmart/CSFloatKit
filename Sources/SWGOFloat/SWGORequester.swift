@@ -9,15 +9,15 @@ import Foundation
 
 @objc public class SWGORequester: NSObject {
     public typealias DataReturned = Skin
-    public typealias Completion = ((Skin?, ApiError?) -> Void)
-    public var completion: ((Skin?, ApiError?) -> Void)
+    public typealias Completion = ((Skin?, ApiError) -> Void)
+    public var completion: ((Skin?, ApiError) -> Void)
     public var inspectLink: String
     
     
     /// Initializes the requester's inspect link and completion properties
     /// - Parameter configuration: Instance of SWGOConfiguration, which contains the input data
     /// - Parameter completion: The Completion of the request, which can return either a Skin or ApiError
-    public init(configuration: SWGOConfiguration, completion: @escaping Completion) {
+    @objc public init(configuration: SWGOConfiguration, completion: @escaping Completion) {
         self.completion = completion
         self.inspectLink = configuration.requestURL
     }
@@ -55,7 +55,7 @@ import Foundation
                 let apiError = ApiError.errorWithCode(code: errorCode)
                 completion(nil, apiError)
             } else {
-                completion(decodedObject, nil)
+                completion(decodedObject, .noError)
             }
         }
         catch {

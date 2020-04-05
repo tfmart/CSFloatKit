@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains the possible erros during the API request
-public enum ApiError: Error {
+@objc public enum ApiError: Int, Error {
     /// CSGOFloat API Error 1: The parameters sent on the request's URL are invalid
     case invalidParameters
     /// CSGOFloat API Error 2: The inspect link sent on the request is invalid
@@ -25,6 +25,8 @@ public enum ApiError: Error {
     case decodeError
     /// Unknown error for an unexpected case
     case unknownError
+    /// When the requested is completed successfully
+    case noError
     
     /**
      Determines which error ocurred from the recieved code
@@ -69,6 +71,8 @@ public enum ApiError: Error {
             return "The data returned could not be read"
         case .unknownError:
             return "An unknown error occurred"
+        case .noError:
+            return "The request was successful"
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Skin: Decodable {
+@objc public class Skin: NSObject, Decodable {
     /// Contains all the information about the skin
     public let itemInfo: ItemInfo?
     /// The error message, in case the API returns an error
