@@ -23,7 +23,7 @@ import Foundation
     }
     
     /// Starts the Requester
-    public func start() {
+    @objc public func start() {
         guard let requestURL = URL(string: self.inspectLink) else {
             self.completion(nil, .urlError)
             return
