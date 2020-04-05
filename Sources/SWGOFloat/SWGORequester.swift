@@ -37,7 +37,9 @@ import Foundation
                 return
             }
             let responseData = String(data: data, encoding: String.Encoding.utf8)
+            #if DEBUG
             dump(responseData)
+            #endif
             self.parseJson(data: data)
             if error != nil {
                 self.completion(nil, .unknownError)
