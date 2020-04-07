@@ -9,13 +9,13 @@ import Foundation
 
 @objc public class Sticker: NSObject, Decodable {
     /// The sticker's ID number
-    public let stickerID: String?
+    @objc public let stickerID: String?
     /// The position in which the sticker is applied in the weapon
     public let slot: Int?
     /// The sticker's codename
-    public let codename: String?
+    @objc public let codename: String?
     /// The sticker's name
-    public let name: String?
+    @objc public let name: String?
     
     private enum CodingKeys: String, CodingKey {
         case slot, codename, name

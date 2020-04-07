@@ -11,17 +11,17 @@ import Foundation
     /// The item's float value, representing it's wear
     public let floatValue: Float?
     /// The name of the weapon's skin
-    public let name: String?
+    @objc public let name: String?
     /// The weapon's type
-    public let weapon: String?
+    @objc public let weapon: String?
     /// The skin's image URL
-    public let imageURL: String?
+    @objc public let imageURL: String?
     /// If the weapon is StatTrak, the amount of kills registered
     public let statTrak: Int?
     /// The weapon's rarity
     public let rarity: Int?
     /// The skin's ID
-    public let itemID: String?
+    @objc public let itemID: String?
     /// The weapon's ID
     public let weaponID: Int?
     /// The weapon's Paint ID
@@ -29,9 +29,9 @@ import Foundation
     /// The weapon's Paint Seed
     public let paintseed: Int?
     /// If the weapon has a name tag, the weapon's custom name
-    public let nameTag: String?
+    @objc public let nameTag: String?
     /// The stickers applied to the weapon
-    public let stickers: [Sticker]?
+    @objc public let stickers: [Sticker]?
     /// Inventory ID
     public let inventory: Int?
     /// The weapon's Origin ID
@@ -41,23 +41,23 @@ import Foundation
     /// The skin's highest float value possible
     public let maxFloat: Float?
     /// The weapon's origin
-    public let origin: String?
+    @objc public let origin: String?
     /// The weapon's quality name (Souvenir, StatTrak, etc...)
-    public let qualityName: String?
+    @objc public let qualityName: String?
     /// The weapon's rarity name
-    public let rarityName: String?
+    @objc public let rarityName: String?
     /// The weapon's wear (Factory New, Field-Tested, etc...)
-    public let wear: String?
+    @objc public let wear: String?
     /// A string with the weapon's name, the skin's name and it's condition name
-    public let fullItemName: String?
+    @objc public let fullItemName: String?
     /// The S parameter from the item's inspect link
-    public let inventoryParameter: String?
+    @objc public let inventoryParameter: String?
     /// The A parameter from the item's inspect link
-    public let aParameter: String?
+    @objc public let aParameter: String?
     /// The D parameter from the item's inspect link
-    public let dParameter: String?
+    @objc public let dParameter: String?
     /// The M parameter from the item's inspect link
-    public let marketParameter: String?
+    @objc public let marketParameter: String?
     
     private enum CodingKeys: String, CodingKey {
         case paintseed, stickers, inventory
