@@ -9,9 +9,9 @@ import Foundation
 
 @objc public class Skin: NSObject, Decodable {
     /// Contains all the information about the skin
-    public let itemInfo: ItemInfo?
+    @objc public let itemInfo: ItemInfo?
     /// The error message, in case the API returns an error
-    public let error: String?
+    @objc public let error: String?
     /// The error code, in case the API returns an error
     public let code: Int?
     
@@ -23,7 +23,7 @@ import Foundation
     required public init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.itemInfo = try? container.decode(ItemInfo.self, forKey: .itemInfo)
-        self.code = try? container.decode(Int.self, forKey: .code)
+        self.code = try container.decode(Int.self, forKey: .code)
         self.error = try? container.decode(String.self, forKey: .error)
     }
 }
@@ -32,7 +32,7 @@ import Foundation
 
 public extension Skin {
     /// Boolean value indicating whether the skin is StatTrak
-    var isStatTrak: Bool {
+    @objc var isStatTrak: Bool {
         guard let weaponInfo = self.itemInfo, weaponInfo.statTrak != nil else {
             return false
         }
@@ -40,7 +40,7 @@ public extension Skin {
     }
     
     /// Boolean value indicating whether the skin has painting applied
-    var isVanilla: Bool {
+    @objc var isVanilla: Bool {
         guard let weaponInfo = self.itemInfo, weaponInfo.name == "-" else {
             return false
         }
@@ -48,7 +48,7 @@ public extension Skin {
     }
     
     /// String representing the item's inspect link
-    var inspectLink: String? {
+    @objc var inspectLink: String? {
         let baseURL = "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20"
         var optionalParameter: String
         guard let aParameter = self.itemInfo?.aParameter, let dParameter = self.itemInfo?.dParameter else { return nil }
@@ -68,7 +68,7 @@ public extension Skin {
      
      - Returns: An optional string representing the URL to get the skin's screenshot or nil if it's the inspect link is invalid
     */
-    func getScreenshotURL() -> String? {
+    @objc func getScreenshotURL() -> String? {
         let baseURL = "https://csgo.gallery/"
         guard let inspectLink = self.inspectLink else { return nil }
         return "\(baseURL)\(inspectLink)"
