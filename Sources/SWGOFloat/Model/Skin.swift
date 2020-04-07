@@ -23,7 +23,7 @@ import Foundation
     required public init(from decoder:Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.itemInfo = try? container.decode(ItemInfo.self, forKey: .itemInfo)
-        self.code = try container.decode(Int.self, forKey: .code)
+        self.code = try? container.decode(Int.self, forKey: .code)
         self.error = try? container.decode(String.self, forKey: .error)
     }
 }
