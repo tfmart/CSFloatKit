@@ -43,7 +43,7 @@ import Foundation
 
 public extension Sticker {
     /// Get the sticker's image URL
-    func getImageURL() -> String? {
+    @objc var imageURL: String? {
         guard let name = self.name else { return nil }
         let completeName = "Sticker | \(name)"
         guard let encodedName = completeName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return nil }

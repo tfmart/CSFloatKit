@@ -87,10 +87,9 @@ public extension Skin {
      
      - Returns: An optional string representing the URL to get the skin's screenshot or nil if it's the inspect link is invalid
     */
-    @objc func getScreenshotURL() -> String? {
+    @objc var screenshotURL: String? {
         let baseURL = "https://csgo.gallery/"
         guard let inspectLink = self.inspectLink else { return nil }
         return "\(baseURL)\(inspectLink)"
     }
 }
-
