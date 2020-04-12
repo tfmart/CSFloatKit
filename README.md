@@ -50,7 +50,7 @@ The request will either the skin fetched from the inspect link or a `ApiError`, 
 
 ## Screenshot
 
-After fetching an instance of  `Skin` with the requester, you can it's `getScreenshotURL()` method to get an URL string which can be used to get a screenshot image, by using the [CS.Deals' csgo.gallery screenshot service](https://cs.deals/pt/screenshot)
+After fetching an instance of  `Skin` with the requester, you can use the `getScreenshotURL()` method to get an URL string which can be used to get a screenshot image, by using the [CS.Deals' csgo.gallery screenshot service](https://cs.deals/pt/screenshot)
 
 ```
 let configuration = SWGOConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
