@@ -6,7 +6,7 @@ final class SWGOFloatTests: XCTestCase {
     func testWithInspectLink() {
         let exp = expectation(description: "InspectLink")
         var skin: Skin?
-        let config = SWGOConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
+        let config = SWGOConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20M2073282427452891333A17897386024D5335550430047430373")
         let request = SWGORequester(configuration: config) { (fetchedSkin, error) in
             XCTAssertNotNil(fetchedSkin)
             guard let actualSkin = fetchedSkin else { return }
