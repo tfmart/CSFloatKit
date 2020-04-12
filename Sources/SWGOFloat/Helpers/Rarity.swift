@@ -25,7 +25,7 @@ import Foundation
     case basic
     
      public init(skin: Skin) {
-        switch skin.itemInfo?.qualityName {
+        switch skin.itemInfo?.rarityName {
         // Weapon Skin cases
         case "Contraband":
             self = .contraband
