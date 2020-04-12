@@ -54,6 +54,14 @@ public extension Skin {
         return true
     }
     
+    /// Boolean value indicating whether the skin is a Souvenir
+    @objc var isSouvenir: Bool {
+        guard let weaponInfo = self.itemInfo, weaponInfo.qualityName == "Souvenir" else {
+            return false
+        }
+        return true
+    }
+    
     /// String representing the item's inspect link
     @objc var inspectLink: String? {
         let baseURL = "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20"
