@@ -77,6 +77,10 @@ public extension Skin {
         return "\(baseURL)\(optionalParameter)A\(aParameter)D\(dParameter)"
     }
     
+    @objc var rarity: Rarity {
+        return Rarity(skin: self)
+    }
+    
     /// Returns the URL to get the screenshot of the item
     /**
      Creates a URL to get the skin's screenshot from cs.deals screnshot service
