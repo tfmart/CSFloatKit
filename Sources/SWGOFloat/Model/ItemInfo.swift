@@ -59,6 +59,58 @@ import Foundation
     /// The M parameter from the item's inspect link
     @objc public let marketParameter: String?
     
+    //Objective-C only properties
+    /// The item's float value, representing it's wear in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsFloatValue: NSNumber? {
+        return floatValue as NSNumber?
+    }
+    /// If the weapon is StatTrak, the amount of kills registered in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsStatTrak: NSNumber? {
+        return statTrak as NSNumber?
+    }
+    /// The weapon's rarity in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsRarity: NSNumber? {
+        return rarity as NSNumber?
+    }
+    /// The weapon's ID in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsWeaponID: NSNumber? {
+        return weaponID as NSNumber?
+    }
+    /// The skin's paint index in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsPaintIndex: NSNumber? {
+        return paintIndex as NSNumber?
+    }
+    /// The weapon's paint seed in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsPaintseed: NSNumber? {
+        return paintseed as NSNumber?
+    }
+    /// The inventory ID in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsInventory: NSNumber? {
+        return inventory as NSNumber?
+    }
+    /// The weapon's origin ID in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsOriginID: NSNumber? {
+        return originID as NSNumber?
+    }
+    /// The skin's lowest float value possible in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsMinFloat: NSNumber? {
+        return minFloat as NSNumber?
+    }
+    /// The skin's highest float value possible in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsMaxFloat: NSNumber? {
+        return maxFloat as NSNumber?
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case paintseed, stickers, inventory
         case floatValue = "floatvalue"

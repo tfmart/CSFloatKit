@@ -15,6 +15,13 @@ import Foundation
     /// The error code, in case the API returns an error
     public let code: Int?
     
+    //Objective-C only properties
+    /// The error code, in case the API returns an error, in NSNumber type           
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsCode: NSNumber? {
+        return code as NSNumber?
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case error, code
         case itemInfo = "iteminfo"

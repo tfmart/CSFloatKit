@@ -17,6 +17,13 @@ import Foundation
     /// The sticker's name
     @objc public let name: String?
     
+    //Objective-C only properties
+    /// The position in which the sticker is applied in the weapon in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsCode: NSNumber? {
+        return slot as NSNumber?
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case slot, codename, name
         case stickerID = "stickerId"
