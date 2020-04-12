@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Rarity.swift
 //  
 //
 //  Created by Tomas Martins on 12/04/20.
