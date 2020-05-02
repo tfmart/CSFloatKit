@@ -75,4 +75,30 @@ import Foundation
             return "The request was successful"
         }
     }
+    
+    //Objective-C only properties
+    ///The error message, represented in NSString type
+    @available(swift, obsoleted: 1.0)
+    public func errorMessage() -> NSString {
+        switch self {
+        case .invalidParameters:
+            return "Improper Parameter Structure"
+        case .invalidInspectLink:
+            return "Invalid Inspect Link Structure"
+        case .maxPendingRequests:
+            return "You reached the maximum amount of simultaneous requests. Please try again"
+        case .serverTimeout:
+            return "Valve's servers didn't reply in time"
+        case .serverUnavailable:
+            return "Valve's servers appear to be offline, please try again later!"
+        case .urlError:
+            return "The input is not a valid URL"
+        case .decodeError:
+            return "The data returned could not be read"
+        case .unknownError:
+            return "An unknown error occurred"
+        case .noError:
+            return "The request was successful"
+        }
+    }
 }
