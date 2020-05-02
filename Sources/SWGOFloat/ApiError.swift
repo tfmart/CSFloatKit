@@ -80,7 +80,7 @@ import Foundation
 //Objective-C only properties
 ///The error message, represented in NSString type
 @available(swift, obsoleted: 1.0)
-class ErrorMessage: NSObject {
+@objc public class ErrorMessage: NSObject {
     public static func errorMessage(forError error: ApiError) -> NSString {
         switch error {
         case .invalidParameters:
