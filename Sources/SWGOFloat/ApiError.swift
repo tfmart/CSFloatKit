@@ -81,7 +81,7 @@ import Foundation
 ///The error message, represented in NSString type
 @available(swift, obsoleted: 1.0)
 @objc public class ErrorMessage: NSObject {
-    public static func errorMessage(forError error: ApiError) -> NSString {
+    @objc public static func errorMessage(forError error: ApiError) -> NSString {
         switch error {
         case .invalidParameters:
             return "Improper Parameter Structure"
