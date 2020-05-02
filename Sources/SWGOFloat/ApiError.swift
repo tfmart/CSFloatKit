@@ -75,12 +75,14 @@ import Foundation
             return "The request was successful"
         }
     }
-    
-    //Objective-C only properties
-    ///The error message, represented in NSString type
-    @available(swift, obsoleted: 1.0)
-    public func errorMessage() -> NSString {
-        switch self {
+}
+
+//Objective-C only properties
+///The error message, represented in NSString type
+@available(swift, obsoleted: 1.0)
+class ErrorMessage: NSObject {
+    public static func errorMessage(forError error: ApiError) -> NSString {
+        switch error {
         case .invalidParameters:
             return "Improper Parameter Structure"
         case .invalidInspectLink:
