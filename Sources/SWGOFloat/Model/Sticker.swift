@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public class Sticker: NSObject, Decodable {
+@objc public class Sticker: NSObject, NSCoding, Decodable {
     /// The sticker's ID number
     @objc public let stickerID: String?
     /// The position in which the sticker is applied in the weapon
@@ -35,6 +35,29 @@ import Foundation
         self.slot = try? container.decode(Int.self, forKey: .slot)
         self.codename = try? container.decode(String.self, forKey: .codename)
         self.name = try? container.decode(String.self, forKey: .name)
+    }
+    
+    //MARK: - NSCoding methods
+    public func encode(with coder: NSCoder) {
+        coder.encode(stickerID, forKey: CodingKeys.stickerID.rawValue)
+        coder.encode(slot, forKey: CodingKeys.slot.rawValue)
+        coder.encode(codename, forKey: CodingKeys.codename.rawValue)
+        coder.encode(name, forKey: CodingKeys.name.rawValue)
+    }
+    
+    private init(stickerID: String?, slot: Int?, codename: String?, name: String?) {
+        self.stickerID = stickerID
+        self.slot = slot
+        self.codename = codename
+        self.name = name
+    }
+    
+    required convenience public init?(coder: NSCoder) {
+        let stickerID = coder.decodeObject(forKey: CodingKeys.stickerID.rawValue) as? String
+        let slot = coder.decodeObject(forKey: CodingKeys.slot.rawValue) as? Int
+        let codename = coder.decodeObject(forKey: CodingKeys.codename.rawValue) as? String
+        let name = coder.decodeObject(forKey: CodingKeys.name.rawValue) as? String
+        self.init(stickerID: stickerID, slot: slot, codename: codename, name: name)
     }
 }
 

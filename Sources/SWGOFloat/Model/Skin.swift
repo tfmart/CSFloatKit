@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public class Skin: NSObject, Decodable {
+@objc public class Skin: NSObject, NSCoding, Decodable {
     /// Contains all the information about the skin
     @objc public let itemInfo: ItemInfo?
     /// The error message, in case the API returns an error
@@ -32,6 +32,26 @@ import Foundation
         self.itemInfo = try? container.decode(ItemInfo.self, forKey: .itemInfo)
         self.code = try? container.decode(Int.self, forKey: .code)
         self.error = try? container.decode(String.self, forKey: .error)
+    }
+    
+    //MARK: - NSCoding methods
+    public func encode(with coder: NSCoder) {
+        coder.encode(itemInfo, forKey: CodingKeys.itemInfo.rawValue)
+        coder.encode(code, forKey: CodingKeys.code.rawValue)
+        coder.encode(error, forKey: CodingKeys.error.rawValue)
+    }
+    
+    private init(itemInfo: ItemInfo?, error: String?, code: Int?) {
+        self.itemInfo = itemInfo
+        self.error = error
+        self.code = code
+    }
+    
+    required convenience public init?(coder: NSCoder) {
+        let itemInfo = coder.decodeObject(forKey: CodingKeys.itemInfo.rawValue) as? ItemInfo
+        let code = coder.decodeObject(forKey: CodingKeys.code.rawValue) as? Int
+        let error = coder.decodeObject(forKey: CodingKeys.error.rawValue) as? String
+        self.init(itemInfo: itemInfo, error: error, code: code)
     }
 }
 

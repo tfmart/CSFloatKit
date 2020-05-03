@@ -59,7 +59,7 @@ import Foundation
     /// The M parameter from the item's inspect link
     @objc public let marketParameter: String?
     
-    //Objective-C only properties
+    //MARK: - Objective-C only properties
     /// The item's float value, representing it's wear in NSNumber type
     @available(swift, obsoleted: 1.0)
     @objc public var nsFloatValue: NSNumber? {
@@ -164,5 +164,91 @@ import Foundation
         self.aParameter = try? container.decode(String.self, forKey: .aParameter)
         self.dParameter = try? container.decode(String.self, forKey: .dParameter)
         self.marketParameter = try? container.decode(String.self, forKey: .marketParameter)
+    }
+    
+    //MARK: - NSCoding methods
+    public func encode(with coder: NSCoder) {
+        coder.encode(floatValue, forKey: CodingKeys.floatValue.rawValue)
+        coder.encode(name, forKey: CodingKeys.name.rawValue)
+        coder.encode(weapon, forKey: CodingKeys.weapon.rawValue)
+        coder.encode(imageURL, forKey: CodingKeys.imageURL.rawValue)
+        coder.encode(statTrak, forKey: CodingKeys.statTrak.rawValue)
+        coder.encode(rarity, forKey: CodingKeys.rarity.rawValue)
+        coder.encode(itemID, forKey: CodingKeys.itemID.rawValue)
+        coder.encode(weaponID, forKey: CodingKeys.weaponID.rawValue)
+        coder.encode(paintIndex, forKey: CodingKeys.paintIndex.rawValue)
+        coder.encode(paintseed, forKey: CodingKeys.paintseed.rawValue)
+        coder.encode(nameTag, forKey: CodingKeys.nameTag.rawValue)
+        coder.encode(stickers, forKey: CodingKeys.stickers.rawValue)
+        coder.encode(inventory, forKey: CodingKeys.inventory.rawValue)
+        coder.encode(originID, forKey: CodingKeys.originID.rawValue)
+        coder.encode(minFloat, forKey: CodingKeys.minFloat.rawValue)
+        coder.encode(maxFloat, forKey: CodingKeys.maxFloat.rawValue)
+        coder.encode(origin, forKey: CodingKeys.origin.rawValue)
+        coder.encode(qualityName, forKey: CodingKeys.qualityName.rawValue)
+        coder.encode(rarityName, forKey: CodingKeys.rarityName.rawValue)
+        coder.encode(wear, forKey: CodingKeys.wear.rawValue)
+        coder.encode(fullItemName, forKey: CodingKeys.fullItemName.rawValue)
+        coder.encode(inventoryParameter, forKey: CodingKeys.inventoryParameter.rawValue)
+        coder.encode(aParameter, forKey: CodingKeys.aParameter.rawValue)
+        coder.encode(dParameter, forKey: CodingKeys.dParameter.rawValue)
+        coder.encode(marketParameter, forKey: CodingKeys.marketParameter.rawValue)
+    }
+    
+    private init(floatValue: Float?, name: String?, weapon: String?, imageURL: String?, statTrak: Int?, rarity: Int?, itemID: String?, weaponID: Int?, paintIndex: Int?, paintseed: Int?, nameTag: String?, stickers: [Sticker]?, inventory: Int?, originID: Int?, minFloat: Float?, maxFloat: Float?, origin: String?, qualityName: String?, rarityName: String?, wear: String?, fullItemName: String?, inventoryParameter: String?, aParameter: String?, dParameter: String?, marketParameter: String?) {
+        self.floatValue = floatValue
+        self.name = name
+        self.weapon = weapon
+        self.imageURL = imageURL
+        self.statTrak = statTrak
+        self.rarity = rarity
+        self.itemID = itemID
+        self.weaponID = weaponID
+        self.paintIndex = paintIndex
+        self.paintseed = paintseed
+        self.nameTag = nameTag
+        self.stickers = stickers
+        self.inventory = inventory
+        self.originID = originID
+        self.minFloat = minFloat
+        self.maxFloat = maxFloat
+        self.origin = origin
+        self.qualityName = qualityName
+        self.rarityName = rarityName
+        self.wear = wear
+        self.fullItemName = fullItemName
+        self.inventoryParameter = inventoryParameter
+        self.aParameter = aParameter
+        self.dParameter = dParameter
+        self.marketParameter = marketParameter
+    }
+    
+    required convenience public init?(coder: NSCoder) {
+        let floatValue = coder.decodeObject(forKey: CodingKeys.floatValue.rawValue) as? Float
+        let name = coder.decodeObject(forKey: CodingKeys.name.rawValue) as? String
+        let weapon = coder.decodeObject(forKey: CodingKeys.weapon.rawValue) as? String
+        let imageURL = coder.decodeObject(forKey: CodingKeys.imageURL.rawValue) as? String
+        let statTrak = coder.decodeObject(forKey: CodingKeys.statTrak.rawValue) as? Int
+        let rarity = coder.decodeObject(forKey: CodingKeys.rarity.rawValue) as? Int
+        let itemID = coder.decodeObject(forKey: CodingKeys.itemID.rawValue) as? String
+        let weaponID = coder.decodeObject(forKey: CodingKeys.weaponID.rawValue) as? Int
+        let paintIndex = coder.decodeObject(forKey: CodingKeys.paintIndex.rawValue) as? Int
+        let paintseed = coder.decodeObject(forKey: CodingKeys.paintseed.rawValue) as? Int
+        let nameTag = coder.decodeObject(forKey: CodingKeys.nameTag.rawValue) as? String
+        let stickers = coder.decodeObject(forKey: CodingKeys.stickers.rawValue) as? [Sticker]
+        let inventory = coder.decodeObject(forKey: CodingKeys.inventory.rawValue) as? Int
+        let originID = coder.decodeObject(forKey: CodingKeys.originID.rawValue) as? Int
+        let minFloat = coder.decodeObject(forKey: CodingKeys.minFloat.rawValue) as? Float
+        let maxFloat = coder.decodeObject(forKey: CodingKeys.maxFloat.rawValue) as? Float
+        let origin = coder.decodeObject(forKey: CodingKeys.originID.rawValue) as? String
+        let qualityName = coder.decodeObject(forKey: CodingKeys.qualityName.rawValue) as? String
+        let rarityName = coder.decodeObject(forKey: CodingKeys.rarityName.rawValue) as? String
+        let wear = coder.decodeObject(forKey: CodingKeys.wear.rawValue) as? String
+        let fullItemName = coder.decodeObject(forKey: CodingKeys.fullItemName.rawValue) as? String
+        let inventoryParameter = coder.decodeObject(forKey: CodingKeys.inventoryParameter.rawValue) as? String
+        let aParameter = coder.decodeObject(forKey: CodingKeys.aParameter.rawValue) as? String
+        let dParameter = coder.decodeObject(forKey: CodingKeys.dParameter.rawValue) as? String
+        let marketParameter = coder.decodeObject(forKey: CodingKeys.marketParameter.rawValue) as? String
+        self.init(floatValue: floatValue, name: name, weapon: weapon, imageURL: imageURL, statTrak: statTrak, rarity: rarity, itemID: itemID, weaponID: weaponID, paintIndex: paintIndex, paintseed: paintseed, nameTag: nameTag, stickers: stickers, inventory: inventory, originID: originID, minFloat: minFloat, maxFloat: maxFloat, origin: origin, qualityName: qualityName, rarityName: rarityName, wear: wear, fullItemName: fullItemName, inventoryParameter: inventoryParameter, aParameter: aParameter, dParameter: dParameter, marketParameter: marketParameter)
     }
 }
