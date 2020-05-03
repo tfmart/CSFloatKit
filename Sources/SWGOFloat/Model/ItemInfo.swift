@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public class ItemInfo: NSObject, Decodable {
+@objc public class ItemInfo: NSObject, NSCoding, Decodable {
     /// The item's float value, representing it's wear
     public let floatValue: Float?
     /// The name of the weapon's skin
