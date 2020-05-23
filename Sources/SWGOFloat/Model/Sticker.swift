@@ -16,6 +16,10 @@ import Foundation
     @objc public let codename: String?
     /// The sticker's name
     @objc public let name: String?
+    /// The sticker's scrapped wear
+    public let wear: Double?
+    /// The sticker's material
+    @objc public let material: String?
     
     //Objective-C only properties
     /// The position in which the sticker is applied in the weapon in NSNumber type
@@ -23,9 +27,14 @@ import Foundation
     @objc public var nsCode: NSNumber? {
         return slot as NSNumber?
     }
+    /// The sticker's scrapped wear in NSNumber type
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsWear: NSNumber? {
+        return slot as NSNumber?
+    }
     
     private enum CodingKeys: String, CodingKey {
-        case slot, codename, name
+        case slot, codename, name, wear, material
         case stickerID = "stickerId"
     }
     
@@ -35,6 +44,8 @@ import Foundation
         self.slot = try? container.decode(Int.self, forKey: .slot)
         self.codename = try? container.decode(String.self, forKey: .codename)
         self.name = try? container.decode(String.self, forKey: .name)
+        self.material = try? container.decode(String.self, forKey: .material)
+        self.wear = try? container.decode(Double.self, forKey: .wear)
     }
     
     //MARK: - NSCoding methods
@@ -45,11 +56,13 @@ import Foundation
         coder.encode(name, forKey: CodingKeys.name.rawValue)
     }
     
-    private init(stickerID: String?, slot: Int?, codename: String?, name: String?) {
+    private init(stickerID: String?, slot: Int?, codename: String?, name: String?, wear: Double?, material: String?) {
         self.stickerID = stickerID
         self.slot = slot
         self.codename = codename
         self.name = name
+        self.wear = wear
+        self.material = material
     }
     
     required convenience public init?(coder: NSCoder) {
@@ -57,7 +70,9 @@ import Foundation
         let slot = coder.decodeObject(forKey: CodingKeys.slot.rawValue) as? Int
         let codename = coder.decodeObject(forKey: CodingKeys.codename.rawValue) as? String
         let name = coder.decodeObject(forKey: CodingKeys.name.rawValue) as? String
-        self.init(stickerID: stickerID, slot: slot, codename: codename, name: name)
+        let wear = coder.decodeObject(forKey: CodingKeys.wear.rawValue) as? Double
+        let material = coder.decodeObject(forKey: CodingKeys.material.rawValue) as? String
+        self.init(stickerID: stickerID, slot: slot, codename: codename, name: name, wear: wear, material: material)
     }
 }
 
