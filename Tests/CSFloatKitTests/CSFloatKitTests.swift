@@ -44,38 +44,17 @@ final class CSFloatKitTests: XCTestCase {
             XCTFail("Invalid inspect link for CSM Service")
             return
         }
-        let request = CSMRequester(configuration: config, screenshotCompletion: { (fetchedScreenshot, error) in
+        let request = CSMRequester(configuration: config, completion: { (fetchedScreenshot, error) in
             XCTAssertEqual(error, .noError)
             XCTAssertNotNil(fetchedScreenshot)
             guard let actualScreenshot = fetchedScreenshot else { return }
             screenshot = actualScreenshot
             exp.fulfill()
         })
-        request.getScreenshot()
+        request.start()
         
         waitForExpectations(timeout: 10) { (error) in
             XCTAssertNotNil(screenshot)
-        }
-    }
-    
-    func testCSMItemInfo() {
-        let exp = expectation(description: "CSM Item Info")
-        var info: CSMItemInfo?
-        guard let config = CSMConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198066691636A20500230363D290167959390434449") else {
-            XCTFail("Invalid inspect link for CSM Service")
-            return
-        }
-        let request = CSMRequester(configuration: config, itemInfoCompletion: { (fetchedInfo, error) in
-            XCTAssertEqual(error, .noError)
-            XCTAssertNotNil(fetchedInfo)
-            guard let actualInfo = fetchedInfo else { return }
-            info = actualInfo
-            exp.fulfill()
-        })
-        request.getItemInfo()
-        
-        waitForExpectations(timeout: 10) { (error) in
-            XCTAssertNotNil(info)
         }
     }
 }
