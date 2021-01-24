@@ -1,5 +1,5 @@
 //
-//  SWGORequester.swift
+//  CSFloatRequester.swift
 //  
 //
 //  Created by Tomás Feitoza Martins  on 04/11/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public class SWGORequester: NSObject {
+@objc public class CSFloatRequester: NSObject {
     public typealias DataReturned = Skin
     public typealias Completion = ((Skin?, ApiError) -> Void)
     public var completion: ((Skin?, ApiError) -> Void)
@@ -15,9 +15,9 @@ import Foundation
     
     
     /// Initializes the requester's inspect link and completion properties
-    /// - Parameter configuration: Instance of SWGOConfiguration, which contains the input data
+    /// - Parameter configuration: Instance of CSFloatConfiguration, which contains the input data
     /// - Parameter completion: The Completion of the request, which can return either a Skin or ApiError
-    @objc public init(configuration: SWGOConfiguration, completion: @escaping Completion) {
+    @objc public init(configuration: CSFloatConfiguration, completion: @escaping Completion) {
         self.completion = completion
         self.inspectLink = configuration.requestURL
     }
@@ -36,8 +36,8 @@ import Foundation
                 self.completion(nil, .unknownError)
                 return
             }
-            let responseData = String(data: data, encoding: String.Encoding.utf8)
             #if DEBUG
+            let responseData = String(data: data, encoding: String.Encoding.utf8)
             dump(responseData)
             #endif
             self.parseJson(data: data)

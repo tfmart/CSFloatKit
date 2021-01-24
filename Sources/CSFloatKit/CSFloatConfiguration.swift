@@ -1,5 +1,5 @@
 //
-//  SWGOConfiguration.swift
+//  CSFloatConfiguration.swift
 //  
 //
 //  Created by Tomás Feitoza Martins  on 04/11/19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public class SWGOConfiguration: NSObject {
+@objc public class CSFloatConfiguration: NSObject {
     /// A weapon's inspect link
     var inspectLink: String?
     /// Inspect link "s" parameter, if the item is from an player's inventory
@@ -21,7 +21,7 @@ import Foundation
     
     private let baseURL = "https://api.csgofloat.com/"
     
-    /// Instantiate FloatController with the S, A, D and M parameters
+    /// Instantiate CSFloatConfiguration with the S, A, D and M parameters
     @objc public init(inventoryParameter: String?, aParameter: String, dParameter: String, marketParameter: String?) {
         self.inventoryParameter = inventoryParameter
         self.aParameter = aParameter
@@ -30,7 +30,7 @@ import Foundation
         self.inspectLink = nil
     }
     
-    /// Instantiate FloatController with an item's inpect link
+    /// Instantiate CSFloatConfiguration with an item's inpect link
     @objc public init(inspectLink: String) {
         self.inspectLink = inspectLink
         self.inventoryParameter = nil
