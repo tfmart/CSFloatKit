@@ -50,7 +50,7 @@ import Foundation
     
     /// Parses the fetched JSON
     /// - Parameter data: The data retrurned in the request
-    public func parseJson(data: Data) {
+    private func parseJson(data: Data) {
         do {
             let decodedObject = try self.parseData(data: data)
             if let errorCode = decodedObject.code {
@@ -67,7 +67,7 @@ import Foundation
     
     /// Parses the data feched in the request
     /// - Parameter data: The data returned in the request
-    public func parseData(data: Data) throws -> Skin{
+    private func parseData(data: Data) throws -> Skin {
         do {
             let decoder = JSONDecoder()
             let decodedWebsites = try decoder.decode(Skin.self, from: data)

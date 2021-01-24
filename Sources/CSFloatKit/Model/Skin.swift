@@ -55,7 +55,7 @@ import Foundation
     }
 }
 
-// MARK: - Extension
+// MARK: - Properties
 
 public extension Skin {
     /// Boolean value indicating whether the skin is StatTrak

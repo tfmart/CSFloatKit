@@ -12,7 +12,7 @@ import Foundation
     var inspectLink: String?
     /// Inspect link "s" parameter, if the item is from an player's inventory
     var inventoryParameter: String?
-    /// Inspect link "a" parameter
+    /// Inspect link "a" parameter, which represents the link's assets
     var aParameter: String?
     /// Inspect link "d" paramete
     var dParameter: String?

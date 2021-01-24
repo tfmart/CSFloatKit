@@ -1,7 +1,7 @@
 import XCTest
-@testable import SWGOFloat
+@testable import CSFloatKit
 
-final class SWGOFloatTests: XCTestCase {
+final class CSFloatKitTests: XCTestCase {
     
     func testWithInspectLink() {
         let exp = expectation(description: "InspectLink")
