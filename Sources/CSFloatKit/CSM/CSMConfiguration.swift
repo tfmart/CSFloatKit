@@ -13,7 +13,7 @@ import Foundation
     
     private let baseURL = "https://cs.money"
     private let screenshotURL = "/screenshots"
-    private let skinInfoURL = "/skin_info"
+    private let itemInfoURL = "/skin_info"
     
     /// Instantiate CSMConfiguration with a skin object
     @objc public init?(skin: Skin) {
@@ -45,7 +45,7 @@ import Foundation
         return "\(baseURL)\(screenshotURL)"
     }
     
-    public var skinInfoRequestURL: String {
-        return "\(baseURL)\(skinInfoURL)?appId=730&id=\(id)&isBot=false"
+    public var itemInfoRequestURL: String {
+        return "\(baseURL)\(itemInfoURL)?appId=730&id=\(id)&isBot=false"
     }
 }

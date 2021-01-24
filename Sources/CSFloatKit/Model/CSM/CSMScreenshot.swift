@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CSMScreenshot.swift
 //  
 //
 //  Created by Tomas Martins on 24/01/21.

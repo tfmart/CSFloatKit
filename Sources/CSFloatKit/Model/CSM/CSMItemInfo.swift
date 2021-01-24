@@ -70,6 +70,8 @@ import Foundation
     let preview: String?
     /// String value representing a URL to a 3D Preview of the item
     let preview3D: String?
+    /// Integer value representing the request error code, if it fails
+    let error: Int?
     
     //MARK: - Objective-C only properties
     
@@ -81,13 +83,13 @@ import Foundation
     
     /// Integer representing the item's name ID in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nsnameID: NSNumber? {
+    @objc public var nsNameID: NSNumber? {
         return nameID as NSNumber?
     }
     
     /// Integer value representing ID of the game the items belongs to. For CSGO items, it will always be 730 in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nsappID: NSNumber? {
+    @objc public var nsAppID: NSNumber? {
         return appID as NSNumber?
     }
     
@@ -99,25 +101,25 @@ import Foundation
     
     /// Integer value representing it's type. It's usage is currently unknown in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nstype: NSNumber? {
+    @objc public var nsType: NSNumber? {
         return type as NSNumber?
     }
     
     /// Integer value representing the UNIX timestamp when the trade lock is going to end, if the item has any in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nstradeLock: NSNumber? {
+    @objc public var nsTradeLock: NSNumber? {
         return tradeLock as NSNumber?
     }
     
     /// Integer value representing the current status. It's usage is currently unknown in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nsstatus: NSNumber? {
+    @objc public var nsStatus: NSNumber? {
         return status as NSNumber?
     }
     
     /// Integer value representing the item's asset ID from it's inspect link in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nsassetID: NSNumber? {
+    @objc public var nsAssetID: NSNumber? {
         return assetID as NSNumber?
     }
     
@@ -129,13 +131,13 @@ import Foundation
     
     /// Integer value representing the amount of StatTrak kills or round MVPs registered on them item, if applicable in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nskills: NSNumber? {
+    @objc public var nsKills: NSNumber? {
         return kills as NSNumber?
     }
     
     /// Array of Double values, indicating the lowest and highest float value possible for the current item in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nsfloatRange: [NSNumber]? {
+    @objc public var nsFloatRange: [NSNumber]? {
         var nsFloatRange: [NSNumber]?
         guard let floatRange = floatRange else { return nil }
         floatRange.forEach {
@@ -146,15 +148,21 @@ import Foundation
     
     /// Int value indicating the item's pattern ID in NSNumber type
     @available(swift, obsoleted: 1.0)
-    @objc public var nspattern: NSNumber? {
+    @objc public var nsPattern: NSNumber? {
         return pattern as NSNumber?
     }
     
     
     /// Integer value indicating the difference between the maximum capacity the site can hold of the current item and the currrent amout in stock
     @available(swift, obsoleted: 1.0)
-    @objc public var nsoverstockDiff: NSNumber? {
+    @objc public var nsOverstockDiff: NSNumber? {
         return overstockDiff as NSNumber?
+    }
+    
+    /// Integer value representing the request error code, if it fails
+    @available(swift, obsoleted: 1.0)
+    @objc public var nsError: NSNumber? {
+        return error as NSNumber?
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -168,6 +176,7 @@ import Foundation
         case csmSkinInfoCase = "case"
         case inspect, steamImg, overstockDiff, preview
         case preview3D = "3d"
+        case error
     }
     
     //MARK: - NSCoding methods
@@ -201,9 +210,10 @@ import Foundation
         coder.encode(overstockDiff, forKey: CodingKeys.overstockDiff.rawValue)
         coder.encode(preview, forKey: CodingKeys.preview.rawValue)
         coder.encode(preview3D, forKey: CodingKeys.preview3D.rawValue)
+        coder.encode(error, forKey: CodingKeys.error.rawValue)
     }
     
-    internal init(id: Int?, nameID: Int?, appID: Int?, price: Double?, float: String?, type: Int?, quality: String?, img: String?, isStatTrak: Bool?, tradeLock: Int?, status: Int?, assetID: Int?, steamID: String?, name: String?, fullName: String?, defaultPrice: Double?, rarity: String?, kills: Int?, isPopular: Bool?, hasHighDemand: Bool?, floatRange: [Double]?, pattern: Int?, collection: CSMCase?, csmSkinInfoCase: CSMCase?, inspect: String?, steamImg: String?, overstockDiff: Int?, preview: String?, preview3D: String?) {
+    internal init(id: Int?, nameID: Int?, appID: Int?, price: Double?, float: String?, type: Int?, quality: String?, img: String?, isStatTrak: Bool?, tradeLock: Int?, status: Int?, assetID: Int?, steamID: String?, name: String?, fullName: String?, defaultPrice: Double?, rarity: String?, kills: Int?, isPopular: Bool?, hasHighDemand: Bool?, floatRange: [Double]?, pattern: Int?, collection: CSMCase?, csmSkinInfoCase: CSMCase?, inspect: String?, steamImg: String?, overstockDiff: Int?, preview: String?, preview3D: String?, error: Int?) {
         self.id = id
         self.nameID = nameID
         self.appID = appID
@@ -233,6 +243,7 @@ import Foundation
         self.overstockDiff = overstockDiff
         self.preview = preview
         self.preview3D = preview3D
+        self.error = error
     }
     
     required convenience public init?(coder: NSCoder) {
@@ -265,7 +276,8 @@ import Foundation
         let overstockDiff = coder.decodeObject(forKey: CodingKeys.overstockDiff.rawValue) as? Int
         let preview = coder.decodeObject(forKey: CodingKeys.preview.rawValue) as? String
         let preview3D = coder.decodeObject(forKey: CodingKeys.preview3D.rawValue) as? String
-        self.init(id: id, nameID: nameID, appID: appID, price: price, float: float, type: type, quality: quality, img: img, isStatTrak: isStatTrak, tradeLock: tradeLock, status: status, assetID: assetID, steamID: steamID, name: name, fullName: fullName, defaultPrice: defaultPrice, rarity: rarity, kills: kills, isPopular: isPopular, hasHighDemand: hasHighDemand, floatRange: floatRange, pattern: pattern, collection: collection, csmSkinInfoCase: csmSkinInfoCase, inspect: inspect, steamImg: steamImg, overstockDiff: overstockDiff, preview: preview, preview3D: preview3D)
+        let error = coder.decodeObject(forKey: CodingKeys.error.rawValue) as? Int
+        self.init(id: id, nameID: nameID, appID: appID, price: price, float: float, type: type, quality: quality, img: img, isStatTrak: isStatTrak, tradeLock: tradeLock, status: status, assetID: assetID, steamID: steamID, name: name, fullName: fullName, defaultPrice: defaultPrice, rarity: rarity, kills: kills, isPopular: isPopular, hasHighDemand: hasHighDemand, floatRange: floatRange, pattern: pattern, collection: collection, csmSkinInfoCase: csmSkinInfoCase, inspect: inspect, steamImg: steamImg, overstockDiff: overstockDiff, preview: preview, preview3D: preview3D, error: error)
     }
 }
 
