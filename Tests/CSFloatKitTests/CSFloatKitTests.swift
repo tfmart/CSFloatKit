@@ -23,7 +23,7 @@ final class CSFloatKitTests: XCTestCase {
     func testWithSADMParameters() {
         let exp = expectation(description: "Parameters")
         var skin: Skin?
-        let config = CSFloatConfiguration(inventoryParameter: nil, aParameter: "13874827217", dParameter: "4649025583329100061", marketParameter: "2608048286785948758")
+        let config = CSFloatConfiguration(inventoryParameter: nil, assetParameter: "13874827217", dParameter: "4649025583329100061", marketParameter: "2608048286785948758")
         let request = CSFloatRequester(configuration: config) { (fetchedSkin, error) in
             XCTAssertNotNil(fetchedSkin)
             guard let actualSkin = fetchedSkin else { return }

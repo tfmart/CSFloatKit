@@ -13,7 +13,7 @@ import Foundation
     /// Inspect link "s" parameter, if the item is from an player's inventory
     var inventoryParameter: String?
     /// Inspect link "a" parameter, which represents the link's assets
-    var aParameter: String?
+    var assetParameter: String?
     /// Inspect link "d" paramete
     var dParameter: String?
     /// Inspect link "m" parameter, if the item is from the Community Market
@@ -22,9 +22,9 @@ import Foundation
     private let baseURL = "https://api.csgofloat.com/"
     
     /// Instantiate CSFloatConfiguration with the S, A, D and M parameters
-    @objc public init(inventoryParameter: String?, aParameter: String, dParameter: String, marketParameter: String?) {
+    @objc public init(inventoryParameter: String?, assetParameter: String, dParameter: String, marketParameter: String?) {
         self.inventoryParameter = inventoryParameter
-        self.aParameter = aParameter
+        self.assetParameter = assetParameter
         self.dParameter = dParameter
         self.marketParameter = marketParameter
         self.inspectLink = nil
@@ -34,7 +34,7 @@ import Foundation
     @objc public init(inspectLink: String) {
         self.inspectLink = inspectLink
         self.inventoryParameter = nil
-        self.aParameter = nil
+        self.assetParameter = nil
         self.dParameter = nil
         self.marketParameter = nil
     }
@@ -47,7 +47,7 @@ import Foundation
     public var requestURL: String {
         if let inspectLink = self.inspectLink {
             return "\(baseURL)?url=\(inspectLink)"
-        } else if let aParameter = self.aParameter, let dParameter = self.dParameter {
+        } else if let aParameter = self.assetParameter, let dParameter = self.dParameter {
             var sParameter: String
             var mParameter: String
             
