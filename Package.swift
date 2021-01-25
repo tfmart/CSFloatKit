@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "SWGOFloat",
+    name: "CSFloatKit",
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
-            name: "SWGOFloat",
-            targets: ["SWGOFloat"]),
+            name: "CSFloatKit",
+            targets: ["CSFloatKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -19,10 +19,10 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "SWGOFloat",
+            name: "CSFloatKit",
             dependencies: []),
         .testTarget(
-            name: "SWGOFloatTests",
-            dependencies: ["SWGOFloat"]),
+            name: "CSFloatKitTests",
+            dependencies: ["CSFloatKit"]),
     ]
 )

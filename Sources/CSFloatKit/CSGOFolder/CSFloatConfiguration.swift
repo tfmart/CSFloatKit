@@ -1,5 +1,5 @@
 //
-//  SWGOConfiguration.swift
+//  CSFloatConfiguration.swift
 //  
 //
 //  Created by Tomás Feitoza Martins  on 04/11/19.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-public class SWGOConfiguration {
+@objc public class CSFloatConfiguration: NSObject {
     /// A weapon's inspect link
     var inspectLink: String?
     /// Inspect link "s" parameter, if the item is from an player's inventory
     var inventoryParameter: String?
-    /// Inspect link "a" parameter
-    var aParameter: String?
+    /// Inspect link "a" parameter, which represents the link's assets
+    var assetParameter: String?
     /// Inspect link "d" paramete
     var dParameter: String?
     /// Inspect link "m" parameter, if the item is from the Community Market
@@ -21,20 +21,20 @@ public class SWGOConfiguration {
     
     private let baseURL = "https://api.csgofloat.com/"
     
-    /// Instantiate FloatController with the S, A, D and M parameters
-    public init(inventoryParameter: String?, aParameter: String, dParameter: String, marketParameter: String?) {
+    /// Instantiate CSFloatConfiguration with the S, A, D and M parameters
+    @objc public init(inventoryParameter: String?, assetParameter: String, dParameter: String, marketParameter: String?) {
         self.inventoryParameter = inventoryParameter
-        self.aParameter = aParameter
+        self.assetParameter = assetParameter
         self.dParameter = dParameter
         self.marketParameter = marketParameter
         self.inspectLink = nil
     }
     
-    /// Instantiate FloatController with an item's inpect link
-    public init(inspectLink: String) {
+    /// Instantiate CSFloatConfiguration with an item's inpect link
+    @objc public init(inspectLink: String) {
         self.inspectLink = inspectLink
         self.inventoryParameter = nil
-        self.aParameter = nil
+        self.assetParameter = nil
         self.dParameter = nil
         self.marketParameter = nil
     }
@@ -47,7 +47,7 @@ public class SWGOConfiguration {
     public var requestURL: String {
         if let inspectLink = self.inspectLink {
             return "\(baseURL)?url=\(inspectLink)"
-        } else if let aParameter = self.aParameter, let dParameter = self.dParameter {
+        } else if let aParameter = self.assetParameter, let dParameter = self.dParameter {
             var sParameter: String
             var mParameter: String
             

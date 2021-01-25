@@ -1,5 +1,5 @@
 //
-//  SWGORequester.swift
+//  CSFloatRequester.swift
 //  
 //
 //  Created by Tomás Feitoza Martins  on 04/11/19.
@@ -7,23 +7,23 @@
 
 import Foundation
 
-public class SWGORequester {
+@objc public class CSFloatRequester: NSObject {
     public typealias DataReturned = Skin
-    public typealias Completion = ((Skin?, ApiError?) -> Void)
-    public var completion: ((Skin?, ApiError?) -> Void)
+    public typealias Completion = ((Skin?, ApiError) -> Void)
+    public var completion: ((Skin?, ApiError) -> Void)
     public var inspectLink: String
     
     
     /// Initializes the requester's inspect link and completion properties
-    /// - Parameter configuration: Instance of SWGOConfiguration, which contains the input data
+    /// - Parameter configuration: Instance of CSFloatConfiguration, which contains the input data
     /// - Parameter completion: The Completion of the request, which can return either a Skin or ApiError
-    public init(configuration: SWGOConfiguration, completion: @escaping Completion) {
+    @objc public init(configuration: CSFloatConfiguration, completion: @escaping Completion) {
         self.completion = completion
         self.inspectLink = configuration.requestURL
     }
     
     /// Starts the Requester
-    public func start() {
+    @objc public func start() {
         guard let requestURL = URL(string: self.inspectLink) else {
             self.completion(nil, .urlError)
             return
@@ -36,8 +36,10 @@ public class SWGORequester {
                 self.completion(nil, .unknownError)
                 return
             }
+            #if DEBUG
             let responseData = String(data: data, encoding: String.Encoding.utf8)
             dump(responseData)
+            #endif
             self.parseJson(data: data)
             if error != nil {
                 self.completion(nil, .unknownError)
@@ -48,14 +50,14 @@ public class SWGORequester {
     
     /// Parses the fetched JSON
     /// - Parameter data: The data retrurned in the request
-    public func parseJson(data: Data) {
+    private func parseJson(data: Data) {
         do {
             let decodedObject = try self.parseData(data: data)
             if let errorCode = decodedObject.code {
                 let apiError = ApiError.errorWithCode(code: errorCode)
                 completion(nil, apiError)
             } else {
-                completion(decodedObject, nil)
+                completion(decodedObject, .noError)
             }
         }
         catch {
@@ -65,7 +67,7 @@ public class SWGORequester {
     
     /// Parses the data feched in the request
     /// - Parameter data: The data returned in the request
-    public func parseData(data: Data) throws -> Skin{
+    private func parseData(data: Data) throws -> Skin {
         do {
             let decoder = JSONDecoder()
             let decodedWebsites = try decoder.decode(Skin.self, from: data)
