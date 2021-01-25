@@ -57,4 +57,26 @@ final class CSFloatKitTests: XCTestCase {
             XCTAssertNotNil(screenshot)
         }
     }
+    
+    func testPreview3D() {
+        let exp = expectation(description: "CSM Screenshot")
+        var previewURL: String?
+        guard let config = CSMConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561199043158336A20517916623D14133434752320963923") else {
+            XCTFail("Invalid inspect link for CSM Service")
+            return
+        }
+        let request = CSMRequester(configuration: config, completion: { (fetchedScreenshot, error) in
+            XCTAssertEqual(error, .noError)
+            XCTAssertNotNil(fetchedScreenshot)
+            guard let actualScreenshot = fetchedScreenshot else { return }
+            previewURL = actualScreenshot.preview3D
+            XCTAssertEqual(previewURL, "https://3d.cs.money/item/TWXUyFZ")
+            exp.fulfill()
+        })
+        request.start()
+        
+        waitForExpectations(timeout: 10) { (error) in
+            XCTAssertNotNil(previewURL)
+        }
+    }
 }

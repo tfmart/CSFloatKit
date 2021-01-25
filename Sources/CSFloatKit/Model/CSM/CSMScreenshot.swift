@@ -47,3 +47,22 @@ import Foundation
         self.init(status: status, cached: cached, imageURL: imageURL, previewURL: previewURL, error: error)
     }
 }
+
+extension CSMScreenshot {
+    var preview3D: String? {
+        let regex = "(?:https:\\/\\/s1.cs.money\\/)([A-Za-z0-9_\\-]{7})"
+        guard let imageURL = self.imageURL else {
+            return nil
+        }
+        let idNsRange = NSRange(location: 0, length: imageURL.utf16.count)
+        do {
+            let expression = try NSRegularExpression(pattern: regex)
+            let firstMatch = expression.firstMatch(in: imageURL, options: [], range: idNsRange)
+            guard let nsRange = firstMatch?.range(at: 1),
+                  let range = Range(nsRange, in: imageURL) else { return nil }
+            return "https://3d.cs.money/item/\(imageURL[range])"
+        } catch {
+            return nil
+        }
+    }
+}
