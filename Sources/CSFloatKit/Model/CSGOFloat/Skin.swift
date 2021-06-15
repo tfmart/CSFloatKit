@@ -7,8 +7,9 @@
 
 import Foundation
 
+/// Object that represents a CSGO item, such as weapon skins, stickers, agents, patches and others.
 @objc public class Skin: NSObject, NSCoding, Decodable {
-    /// Contains all the information about the skin
+    /// Contains all the information about the item
     @objc public let itemInfo: ItemInfo?
     /// The error message, in case the API returns an error
     @objc public let error: String?
@@ -16,7 +17,8 @@ import Foundation
     public let code: Int?
     
     //Objective-C only properties
-    /// The error code, in case the API returns an error, in NSNumber type           
+    /// The error code, in case the API returns an error, in NSNumber type.
+    /// This property can only be accessed through Objective-C
     @available(swift, obsoleted: 1.0)
     @objc public var nsCode: NSNumber? {
         return code as NSNumber?

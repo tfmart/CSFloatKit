@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Object to assist with configurating a skin to be used with CS.Money services
 @objc public class CSMConfiguration: NSObject {
     /// The ID number of skin, usually it's the weapon's asset parameter (the A parameter from an inspect link)
     var id: Int
@@ -15,7 +16,7 @@ import Foundation
     private let screenshotURL = "/screenshots"
     private let itemInfoURL = "/skin_info"
     
-    /// Instantiate CSMConfiguration with a skin object
+    /// Instantiate CSMConfiguration with a Skin object
     @objc public init?(skin: Skin) {
         // Checks if the inspect link is from an item from an inventory. CSM service doesn't support inspect links from the Steam Community Market
         guard let inventoryParameter = skin.itemInfo?.inventoryParameter, Int(inventoryParameter) != 0, let asset = skin.itemInfo?.aParameter, let assetInt = Int(asset) else {
@@ -41,10 +42,12 @@ import Foundation
         
     }
     
+    /// A string value representing the URL to request a screenshot on CS.Money's service
     public var screenshotRequestURL: String {
         return "\(baseURL)\(screenshotURL)"
     }
     
+    /// A string value representing the URL to request information of an item with CS.Money's service
     public var itemInfoRequestURL: String {
         return "\(baseURL)\(itemInfoURL)?appId=730&id=\(id)&isBot=false"
     }

@@ -7,10 +7,16 @@
 
 import Foundation
 
+/// An object that represents a CS.Money screenshot service request to be made
 @objc public class CSMRequester: NSObject {
+    /// Completion handler to be executed after the request, which could either return an item's screenshot or a error message
     public var completion: ((CSMScreenshot?, CSMError) -> Void)
     private var configuration: CSMConfiguration
     
+    /// Initialize a request service using an instance of CSMConfiguration and a completion handler to be executed after the request is completed
+    /// - Parameters:
+    ///   - configuration: An instance of CSMConfiguration to be used by the request to fetch the screenshot of it's configured item inspect link
+    ///   - completion: A block of code to be executed when the request is completed. It will also return either the item's screenshot image or an instance of CSMError
     @objc public init(configuration: CSMConfiguration,
                       completion: @escaping ((CSMScreenshot?, CSMError) -> Void)) {
         self.completion = completion
