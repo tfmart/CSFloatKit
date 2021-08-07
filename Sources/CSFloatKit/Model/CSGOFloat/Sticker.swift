@@ -85,7 +85,7 @@ public extension Sticker {
         guard let name = self.name else { return nil }
         let completeName = "Sticker | \(name)"
         guard let encodedName = completeName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return nil }
-        let baseURL = "http://api.steamapis.com/image/item/730/"
+        let baseURL = "https://api.steamapis.com/image/item/730/"
         return "\(baseURL)\(encodedName)"
     }
 }
