@@ -255,7 +255,7 @@ import Foundation
 
 extension ItemInfo {
     /// The skin's image URL
-    @objc var imageUrl: String? {
+    @objc public var imageUrl: String? {
         guard let url = self.httpImageUrl else { return nil }
         guard url.hasPrefix("http://") else { return httpImageUrl }
         return url.replacingOccurrences(of: "http://", with: "https://")
