@@ -9,14 +9,13 @@ import Foundation
 
 /// Object that holds all the information available on an item
 @objc public class ItemInfo: NSObject, NSCoding, Decodable {
+    @objc private let httpImageUrl: String?
     /// The item's float value, representing it's wear
     public let floatValue: Float?
     /// The name of the weapon's skin
     @objc public let name: String?
     /// The weapon's type
     @objc public let weapon: String?
-    /// The skin's image URL
-    @objc public let imageURL: String?
     /// If the weapon is StatTrak, the amount of kills registered
     public let statTrak: Int?
     /// The weapon's rarity
@@ -143,7 +142,7 @@ import Foundation
         self.floatValue = try? container.decode(Float.self, forKey: .floatValue)
         self.name = try? container.decode(String.self, forKey: .name)
         self.weapon = try? container.decode(String.self, forKey: .weapon)
-        self.imageURL = try? container.decode(String.self, forKey: .imageURL)
+        self.httpImageUrl = try? container.decode(String.self, forKey: .imageURL)
         self.statTrak = try? container.decode(Int.self, forKey: .statTrak)
         self.rarity = try? container.decode(Int.self, forKey: .rarity)
         self.itemID = try? container.decode(String.self, forKey: .itemID)
@@ -172,7 +171,7 @@ import Foundation
         coder.encode(floatValue, forKey: CodingKeys.floatValue.rawValue)
         coder.encode(name, forKey: CodingKeys.name.rawValue)
         coder.encode(weapon, forKey: CodingKeys.weapon.rawValue)
-        coder.encode(imageURL, forKey: CodingKeys.imageURL.rawValue)
+        coder.encode(httpImageUrl, forKey: CodingKeys.imageURL.rawValue)
         coder.encode(statTrak, forKey: CodingKeys.statTrak.rawValue)
         coder.encode(rarity, forKey: CodingKeys.rarity.rawValue)
         coder.encode(itemID, forKey: CodingKeys.itemID.rawValue)
@@ -200,7 +199,7 @@ import Foundation
         self.floatValue = floatValue
         self.name = name
         self.weapon = weapon
-        self.imageURL = imageURL
+        self.httpImageUrl = imageURL
         self.statTrak = statTrak
         self.rarity = rarity
         self.itemID = itemID
@@ -251,5 +250,14 @@ import Foundation
         let dParameter = coder.decodeObject(forKey: CodingKeys.dParameter.rawValue) as? String
         let marketParameter = coder.decodeObject(forKey: CodingKeys.marketParameter.rawValue) as? String
         self.init(floatValue: floatValue, name: name, weapon: weapon, imageURL: imageURL, statTrak: statTrak, rarity: rarity, itemID: itemID, weaponID: weaponID, paintIndex: paintIndex, paintseed: paintseed, nameTag: nameTag, stickers: stickers, inventory: inventory, originID: originID, minFloat: minFloat, maxFloat: maxFloat, origin: origin, qualityName: qualityName, rarityName: rarityName, wear: wear, fullItemName: fullItemName, inventoryParameter: inventoryParameter, aParameter: aParameter, dParameter: dParameter, marketParameter: marketParameter)
+    }
+}
+
+extension ItemInfo {
+    /// The skin's image URL
+    @objc var imageUrl: String? {
+        guard let url = self.httpImageUrl else { return nil }
+        guard url.hasPrefix("http://") else { return httpImageUrl }
+        return url.replacingOccurrences(of: "http://", with: "https://")
     }
 }
