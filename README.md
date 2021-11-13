@@ -10,9 +10,9 @@ If you're running Xcode 11 or later, you can simply go to `File -> Swift Package
 
 If you're running an earlier version, you'll have to set up SPM on your project and add the following dependency to your `Package.swift` file:
 
-```
+```swift
 dependencies: [
-.package(url: "https://github.com/tfmart/CSFloatKit.git", from: "0.1.0")
+    .package(url: "https://github.com/tfmart/CSFloatKit.git", from: "0.1.0")
 ]
 ```
 
@@ -22,13 +22,13 @@ To get started, you will need to create an instance of `CSFloatConfiguration` an
 
 * Initiating with an inspect link
 
-```
+```swift
 let configuration = CSFloatConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
 ```
 
 * Initiating with the S, A, D, M parameters
 
-```
+```swift
 let configuration = CSFloatConfiguration(inventoryParameter: nil,
                                          assetParameter: "13874827217",
                                          dParameter: "4649025583329100061",
@@ -37,7 +37,7 @@ let configuration = CSFloatConfiguration(inventoryParameter: nil,
 
 After the setting up the configuration, create an instance of  `SWGORequester` to create a float request
 
-```
+```swift
 let request = CSFloatRequester(configuration: config) { (skin, error) in
     
 }
@@ -45,7 +45,7 @@ let request = CSFloatRequester(configuration: config) { (skin, error) in
 
 And to start the request:
 
-```
+```swift
 request.start()
 ```
 
@@ -55,7 +55,7 @@ The request will either the skin fetched from the inspect link or a `ApiError`, 
 
 After fetching an instance of  `Skin` with the requester, you can use the `getScreenshotURL()` method to get an URL string which can be used to get a screenshot image, by using the [CS.Deals' csgo.gallery screenshot service](https://cs.deals/pt/screenshot)
 
-```
+```swift
 let configuration = CSFloatConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198084749846A698323590D7935523998312483177")
 let request = SWGORequester(configuration: config) { (skin, error) in
     let screenshotURL = skin.getScreenshotURL()
@@ -66,7 +66,7 @@ request.start()
 
 From version 0.3 upwards, it's also possible to fetch [CS.Money](https://cs.money) screenshots and 3D models, just by using the item's inspect link or an instance of a `Skin` object:
 
-```
+```swift
 let configuration = CSMConfiguration(inspectLink: "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561199043158336A20517916623D14133434752320963923")
 let request = CSMRequester(configuration: config, completion: { (fetchedScreenshot, error) in
     // URL for the skin's screenshot
